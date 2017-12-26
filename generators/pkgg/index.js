@@ -193,16 +193,20 @@ module.exports = class extends yeoman {
       '**********************************************************************************'
     );
 
+    var filePath = '';
+    var content = '';
+    var result = '';
+
     switch (this.packageType) {
       case 'config':
         break;
       case 'pkgrestapi':
         // Build content
-        var filePath = this.templatePath(
+        filePath = this.templatePath(
           this.pathToTemplates + '/pkg-rest-endpoint/_end_log.txt'
         );
-        var content = this.fs.read(filePath);
-        var result = ejs.compile(content)({
+        content = this.fs.read(filePath);
+        result = ejs.compile(content)({
           projectname: this.projectName,
           packagename: this.packageName,
           chalk: chalk
@@ -210,20 +214,20 @@ module.exports = class extends yeoman {
         this.log(result);
 
         break;
-      //   Case 'pkggokitapi':
-      //     // Build content
-      //     var filePath = this.templatePath(
-      //       this.pathToTemplates + '/pkg-gokit-endpoint/_end_log.txt'
-      //     );
-      //     var content = this.fs.read(filePath);
-      //     var result = ejs.compile(content)({
-      //       projectname: this.projectName,
-      //       packagename: this.packageName,
-      //       chalk: chalk
-      //     });
-      //     this.log(result);
+      case 'pkggokitapi':
+        // Build content
+        filePath = this.templatePath(
+          this.pathToTemplates + '/pkg-gokit-endpoint/_end_log.txt'
+        );
+        content = this.fs.read(filePath);
+        result = ejs.compile(content)({
+          projectname: this.projectName,
+          packagename: this.packageName,
+          chalk: chalk
+        });
+        this.log(result);
 
-      //     break;
+        break;
       default:
         this.log('nothing to do');
         break;
