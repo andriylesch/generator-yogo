@@ -1,0 +1,5 @@
+APP_PORT=8080
+KAFKA_BROKERS="localhost:9092"
+SVC_TRACING_ZIPKIN="http://localhost:9411"
+<% for (property in envs) { %>
+<%- envs[property]+"=\"\"" %> <% } %>

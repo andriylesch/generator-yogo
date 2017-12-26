@@ -1,0 +1,16 @@
+
+<%- chalk.green('In file "main.go" you will need to add part of code :') %>
+
+<%- chalk.green("- Section for initialize Service, Tracing, Endpoint.") %>
+
+// <%- packagename%> endpoint
+<%- packagename%>Service := <%- packagename%>.NewService(<%- packagename%>.NewRepository(nil))
+<%- packagename%>Service = <%- packagename%>.NewTracing(<%- packagename%>Service)
+<%- packagename%>Handler := <%- packagename%>.NewHandler(<%- packagename%>Service)
+
+<%- chalk.green("- Add handler") %>
+
+router.Handle("/<%- packagename%>/", tracing.HTTPMiddleware("<%- packagename%>-handler", http.HandlerFunc(<%- packagename%>Handler.Get)))
+
+<%- chalk.green("Enjoy :) ") %>
+
