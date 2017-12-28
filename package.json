@@ -1,8 +1,8 @@
 {
   "name": "generator-yogo",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description":
-    "Generator golang allows to create projects like (GO-KIT, REST-API, GRPS, KAFKA and etc)",
+    "Generator golang allows to create projects like (Console ('Hello world'), REST-API)",
   "homepage": "http://homepageURL.com",
   "author": {
     "name": "Andriy Lesch",
@@ -10,15 +10,15 @@
     "url": "Andriy Lesch"
   },
   "files": ["generators"],
-  "main": "generators/index.js",
+  "main": "generators/app/index.js",
   "keywords": [
-    "chalk",
-    "copy-file",
-    "toml",
-    "lodash",
-    "path",
-    "yosay",
-    "yeoman-generator"
+    "yeoman-generator",
+    "go",
+    "golang",
+    "app",
+    "scaffold",
+    "yogo",
+    "generator-yogo"
   ],
   "devDependencies": {
     "yeoman-test": "^1.7.0",

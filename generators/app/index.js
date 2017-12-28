@@ -9,7 +9,7 @@ var ejs = require('ejs');
 
 module.exports = class extends yeoman {
   _getRepoUrl() {
-    var destinationPath = this.destinationRoot();
+    var destinationPath = process.env.LOCAL_PATH || this.destinationRoot();
     var repoUrl = '';
 
     this.log('Destination Path = ', destinationPath);
@@ -30,6 +30,7 @@ module.exports = class extends yeoman {
     this.props = {};
     this.pathToTemplates = '../../templates';
     this.repoUrl = this._getRepoUrl();
+    this.IsContinue = this.repoUrl.length > 0;
   }
 
   configuring() {
@@ -38,13 +39,6 @@ module.exports = class extends yeoman {
   }
 
   prompting() {
-    if (this.repoUrl.length === 0) {
-      this.log(
-        "You need to create progect in directory 'GOPATH/src/<YOUR_PROJECT>'. Sorry but in current directory you can't create"
-      );
-      return;
-    }
-
     // Welcome message
     this.log(
       yosay(
@@ -53,6 +47,15 @@ module.exports = class extends yeoman {
           chalk`{bold.rgb(105, 215, 226) GoLang} generator!`
       )
     );
+
+    if (!this.IsContinue) {
+      this.log(
+        `Create progect in directory '${chalk.red(
+          'GOPATH/src/<YOUR_PROJECT>'
+        )}'. YoGo generator will stop execution.`
+      );
+      return;
+    }
 
     var prompts = [
       {
@@ -67,11 +70,11 @@ module.exports = class extends yeoman {
           {
             name: 'REST API microservice',
             value: 'restapi'
-          },
-          {
-            name: 'GO-KIT microservice',
-            value: 'gokitapi'
           }
+          // {
+          //   name: 'GO-KIT microservice',
+          //   value: 'gokitapi'
+          // },
           // {
           //   name: 'Basic Worker',
           //   value: 'worker',
@@ -164,6 +167,8 @@ module.exports = class extends yeoman {
   }
 
   writing() {
+    if (!this.IsContinue) return;
+
     switch (this.projectType) {
       case 'console':
         this.fs.copy(
@@ -349,6 +354,8 @@ module.exports = class extends yeoman {
   }
 
   end() {
+    if (!this.IsContinue) return;
+
     this.log('\n');
     this.log(
       '**********************************************************************************'

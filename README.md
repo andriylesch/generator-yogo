@@ -1,123 +1,145 @@
-# generator-yogo
+# YoGo - golang code generator 
+![Logo](https://github.com/andriylesch/generator-yogo/blob/master/logo_small.png)
 
-![Logo](https://github.com/ricardo-ch/generator-golang/blob/master/logo_small.png)
-
-this generator will allow you to create projects like
+[Yeoman](http://yeoman.io/) generator for [GO](https://golang.org/) language allows you to create projects like :
 - Console (basic "Hello world")
-- GO-KIT microservice
 - Rest API microservice
-- KAFKA producer
-- KAFKA consumer
-- Worcker
 
-So right now as developer you don't need to create each time the same skeleton of project. Just generate and focus for implementing your logic.
+So right now as developer you don't need to create each time the same skeleton of project. 
+Just generate it and focus for implementing logic in new microservice.
 
-## Install 
+### The Go Programming Language
 
-Clone this repository (git clone)
+Detail info you can find [here](https://golang.org/doc/).
 
-If yeoman is not installed please
+# Preparation for Usage
+
+- Install yeoman on your system
 
 ```bash
 npm install -g yo
 ```
+- Install generator-yogo 
 
-Open the solution
 ```bash
-npm install
-sudo npm link
+npm install generator-yogo
 ```
 
-now that we are ready to test.
+- Launch the generator
+```bash
+yo yogo
+```
+
+# Create new project
+
+Create new directory in folder **GOPATH/src** folder
 
 ```bash
+cd $GOPATH/src
 mkdir [ProjectName]
 cd [ProjectName]
-yo golang
+yo yogo
 ```
 
-You can test it it will work only for (go-kit and restapi applications) :
+And follow list of options
 
-```bash
-go test ./... -tags=unit -v
+## Structure of projects
+
 ```
-
-In order to run it, you have to create the endpoints in your main.go
-To help you a _main.todelete.txt is generated.
-Copy/paste and adpat maybe a little bit.
-
-```bash
-go run main.go
+  ATTENTION:  YoGo generator will only generate directory hierarchy in *$GOPATH/src* folder.
 ```
+**Example console app**
+<pre>
+  $GOPATH folder
+  └── src
+      └── <YOUR_APP>
+          ├── main.go                   # entrypoint
+          ├── .gitignore                 
+          ├── Dockerfile                 
+          ├── Makefile                  
+          └── Readme.md                  
+</pre>
+  
+**Example REST API microservice**
+<pre>
+$GOPATH folder
+└── src
+    └── <YOUR_APP>
+        ├── main.go                     # entrypoint
+        ├── config
+        │   ├── config.go               # source file
+        │   ├── config_test.go          # test file
+        │   ├── config.toml             # config file
+        │   └── config.toml.example     # config example file
+        ├── <NAME_YOUR_PACKAGE>
+        │   ├── endpoint.go             
+        │   ├── interface.go            
+        │   ├── model.go                
+        │   ├── repository.go           
+        │   ├── service.go              
+        │   └── service_tracing.go      
+        ├── .gitignore                   
+        ├── Dockerfile                   
+        ├── Makefile                    
+        ├── Gopkg.toml          
+        └── Readme.md                   
+</pre>
 
-Then you'll be able to test the endpoints :
-
-```bash
-GET /[YOUR_PACKAGE_NAME]/{ID}
-
-// Response
-{
-    "ID" : {ID}
-}
-```
+**FYI:** In future will be provided list of new projects
+- GO-KIT microservice
+- KAFKA producer
+- KAFKA consumer
+- etc
 
 # Generate project via docker 
 
+Follow options bellow
 - install docker on your local system 
 - clone this repository (git clone)
-- open terminal and open `generator-golang` folder
+- open terminal and go to `generator-yogo` folder
 - type command bellow
 
 for windows users
 ``` bash
-docker build -t generator-golang:latest .
-docker run -it -v {YOUR_LOCAL_PATH}:/home/yeoman --name generator-golang-container generator-golang
+docker build -t generator-yogo:latest .
+docker run -it -v {YOUR_LOCAL_PATH}:/home/yeoman -e LOCAL_PATH=${LOCAL_PATH} --name generator-yogo-container generator-yogo
 ```
 
-for linux and macOS users
+for Linux and MacOS users
 
 ```bash
 make docker LOCAL_PATH=YOUR_LOCAL_PATH
 ```
 where **YOUR_LOCAL_PATH** - local folder where will be generated your project
 
-create your folder
-```bash
-mkdir [ProjectName]
-cd [ProjectName]
-yo golang
-```
 
 # How to create new package in existed microservice.
 
-Developer needs to open in terminal his project folder.
+Open in terminal your project.
 
 ```bash
-yo golang:pkgg
+yo yogo:pkgg
 ```
 
 List of packages what is possible to create and use :
 - config
-- GO-KIT endpoint
-
-**FYI: Soon will exist possibility to create :**
-- `kafkapkg (consumer/producer)`
-- `rest endpoint`
--  etc  
+- REST-API endpoint
 
 ### Config package
 
 Developer has possibility to add **config** package in his application. 
 In this case it will be generated standart config package with structure 
 
-```
-- config
-    |- config.toml
-    |- config.toml.example
-    |- config.go
-    |- config_test.go
-
-```
+<pre>
+$GOPATH folder
+└── src
+    └── <YOUR_APP>
+          ├── config
+          ├── config.go               # source file
+          ├── config_test.go          # test file
+          ├── config.toml             # config file
+          └── config.toml.example     # config example file
+</pre>
 
 ###### NOTE: As default, **YOGO** generate config.toml file with three ENV valiables ( *APP_PORT*, *KAFKA_BROKERS*, *SVC_TRACING_ZIPKIN* )
 
@@ -134,7 +156,3 @@ DB_PORT=5432
 ```
 
 Right now generate config package. All ENVs will be added in code plus default ( *APP_PORT*, *KAFKA_BROKERS*, *SVC_TRACING_ZIPKIN* ).
-  
-
-
-

@@ -79,7 +79,7 @@ module.exports = class extends yeoman {
             this.log('\n');
             this.log(
               chalk.default.red(
-                "ERROR : Your config toml file is not valid. 'generator-golang' will create default config package."
+                "ERROR : Your config toml file is not valid. 'generator-yogo' will create default config package."
               )
             );
             this.log('\n');
@@ -187,7 +187,7 @@ module.exports = class extends yeoman {
       '**********************************************************************************'
     );
     this.log(
-      '* Your package is now created, you can follow description and to get start using *'
+      '* Your package is now created, you can follow description and start using *'
     );
     this.log(
       '**********************************************************************************'
@@ -212,22 +212,21 @@ module.exports = class extends yeoman {
           chalk: chalk
         });
         this.log(result);
-
         break;
-      case 'pkggokitapi':
-        // Build content
-        filePath = this.templatePath(
-          this.pathToTemplates + '/pkg-gokit-endpoint/_end_log.txt'
-        );
-        content = this.fs.read(filePath);
-        result = ejs.compile(content)({
-          projectname: this.projectName,
-          packagename: this.packageName,
-          chalk: chalk
-        });
-        this.log(result);
+      // Case 'pkggokitapi':
+      //   // Build content
+      //   filePath = this.templatePath(
+      //     this.pathToTemplates + '/pkg-gokit-endpoint/_end_log.txt'
+      //   );
+      //   content = this.fs.read(filePath);
+      //   result = ejs.compile(content)({
+      //     projectname: this.projectName,
+      //     packagename: this.packageName,
+      //     chalk: chalk
+      //   });
+      //   this.log(result);
 
-        break;
+      //   break;
       default:
         this.log('nothing to do');
         break;
