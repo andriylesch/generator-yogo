@@ -4,7 +4,6 @@ var yeoman = require('yeoman-generator');
 var _ = require('lodash');
 var chalk = require('chalk');
 var yosay = require('yosay');
-// Var fs = require('fs');
 var toml = require('toml');
 var ejs = require('ejs');
 
@@ -34,10 +33,6 @@ module.exports = class extends yeoman {
             name: 'Config package',
             value: 'config'
           },
-          // {
-          //     name: 'GO-KIT package',
-          //     value: 'pkggokitapi',
-          // },
           {
             name: 'REST API package',
             value: 'pkgrestapi'
@@ -152,25 +147,7 @@ module.exports = class extends yeoman {
           this.destinationPath('./' + this.packageName + '/service.go'),
           { projectname: this.projectName, packagename: this.packageName }
         );
-
-        // Copy utest package name
-
         break;
-      // Case "pkggokitapi":
-
-      //     // copy package name
-      //     this.fs.copyTpl(this.templatePath(this.pathToTemplates + '/pkg-gokit-endpoint/_endpoint.go'), this.destinationPath('./' + this.packageName + '/endpoint.go'), { projectname: this.projectName, packagename: this.packageName });
-      //     this.fs.copyTpl(this.templatePath(this.pathToTemplates + '/pkg-gokit-endpoint/_http_transport.go'), this.destinationPath('./' + this.packageName + '/http_transport.go'), { projectname: this.projectName, packagename: this.packageName });
-      //     this.fs.copyTpl(this.templatePath(this.pathToTemplates + '/pkg-gokit-endpoint/_model.go'), this.destinationPath('./' + this.packageName + '/model.go'), { projectname: this.projectName, packagename: this.packageName });
-      //     this.fs.copyTpl(this.templatePath(this.pathToTemplates + '/pkg-gokit-endpoint/_service.go'), this.destinationPath('./' + this.packageName + '/service.go'), { projectname: this.projectName, packagename: this.packageName });
-      //     this.fs.copyTpl(this.templatePath(this.pathToTemplates + '/pkg-gokit-endpoint/_service_tracing.go'), this.destinationPath('./' + this.packageName + '/service_tracing.go'), { projectname: this.projectName, packagename: this.packageName });
-
-      //     // copy utest package name
-      //     this.fs.copyTpl(this.templatePath(this.pathToTemplates + '/pkg-gokit-endpoint/_service_tracing_test.go'), this.destinationPath('./' + this.packageName + '/service_tracing_test.go'), { projectname: this.projectName, packagename: this.packageName });
-      //     this.fs.copyTpl(this.templatePath(this.pathToTemplates + '/pkg-gokit-endpoint/_endpoint_test.go'), this.destinationPath('./' + this.packageName + '/endpoint_test.go'), { projectname: this.projectName, packagename: this.packageName });
-      //     this.fs.copyTpl(this.templatePath(this.pathToTemplates + '/pkg-gokit-endpoint/_http_transport_test.go'), this.destinationPath('./' + this.packageName + '/http_transport_test.go'), { projectname: this.projectName, packagename: this.packageName });
-
-      //     break;
       default:
         this.log('nothing to do');
         break;
@@ -213,20 +190,6 @@ module.exports = class extends yeoman {
         });
         this.log(result);
         break;
-      // Case 'pkggokitapi':
-      //   // Build content
-      //   filePath = this.templatePath(
-      //     this.pathToTemplates + '/pkg-gokit-endpoint/_end_log.txt'
-      //   );
-      //   content = this.fs.read(filePath);
-      //   result = ejs.compile(content)({
-      //     projectname: this.projectName,
-      //     packagename: this.packageName,
-      //     chalk: chalk
-      //   });
-      //   this.log(result);
-
-      //   break;
       default:
         this.log('nothing to do');
         break;

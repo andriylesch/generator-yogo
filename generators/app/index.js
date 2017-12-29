@@ -3,7 +3,6 @@ var yeoman = require('yeoman-generator');
 var _ = require('lodash');
 var chalk = require('chalk');
 var yosay = require('yosay');
-// Var fs = require('fs');
 var toml = require('toml');
 var ejs = require('ejs');
 
@@ -11,18 +10,10 @@ module.exports = class extends yeoman {
   _getRepoUrl() {
     var destinationPath = process.env.LOCAL_PATH || this.destinationRoot();
     var repoUrl = '';
-
-    this.log('Destination Path = ', destinationPath);
-
     var index = destinationPath.indexOf('/src/');
-    this.log('index = ', index);
-
     if (index !== -1) {
       repoUrl = destinationPath.substring(index + '/src/'.length);
     }
-
-    this.log('repoUrl = ', repoUrl);
-
     return repoUrl;
   }
 
@@ -71,22 +62,6 @@ module.exports = class extends yeoman {
             name: 'REST API microservice',
             value: 'restapi'
           }
-          // {
-          //   name: 'GO-KIT microservice',
-          //   value: 'gokitapi'
-          // },
-          // {
-          //   name: 'Basic Worker',
-          //   value: 'worker',
-          // },
-          // {
-          //   name: 'Basic Golang Consumer (KAFKA)',
-          //   value: 'consumer',
-          // },
-          // {
-          //   name: 'Basic Golang Producer (KAFKA)',
-          //   value: 'producer',
-          // },
         ]
       },
       {
@@ -122,7 +97,12 @@ module.exports = class extends yeoman {
           {
             name: '.gitignore',
             value: 'gitignore',
-            checked: false
+            checked: true
+          },
+          {
+            name: 'README.md',
+            value: 'readme',
+            checked: true
           },
           {
             name: 'Dockerfile',
@@ -138,11 +118,6 @@ module.exports = class extends yeoman {
             name: 'Makefile',
             value: 'makefile',
             checked: true
-          },
-          {
-            name: 'README.md',
-            value: 'readme',
-            checked: false
           }
         ]
       }
@@ -312,6 +287,7 @@ module.exports = class extends yeoman {
   }
 
   _copyAdditionalFiles() {
+    // Copy gitignore file
     if (this.includeGitIgnore) {
       this.fs.copyTpl(
         this.templatePath('_gitignore'),
@@ -320,6 +296,7 @@ module.exports = class extends yeoman {
       );
     }
 
+    // Copy Docker file
     if (this.includeDockerfile) {
       this.fs.copyTpl(
         this.templatePath('_Dockerfile'),
@@ -328,6 +305,7 @@ module.exports = class extends yeoman {
       );
     }
 
+    // Copy docker-compose file
     if (this.includeDockerCompose) {
       this.fs.copyTpl(
         this.templatePath('_docker-compose.yml'),
@@ -336,6 +314,7 @@ module.exports = class extends yeoman {
       );
     }
 
+    // Copy Makefile file
     if (this.includeMakefile) {
       this.fs.copyTpl(this.templatePath('_Makefile'), this.destinationPath('Makefile'), {
         projectname: this.projectName,
@@ -344,6 +323,7 @@ module.exports = class extends yeoman {
       });
     }
 
+    // Copy README file
     if (this.includeReadmeFile) {
       this.fs.copyTpl(
         this.templatePath('_readme.md'),
