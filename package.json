@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "description":
     "Generator golang allows to create projects like (Console ('Hello world'), REST-API)",
-  "homepage": "http://homepageURL.com",
   "author": {
     "name": "Andriy Lesch",
     "email": "clasikas@gmail.com",
-    "url": "Andriy Lesch"
+    "url": "https://github.com/andriylesch"
   },
   "files": ["generators"],
   "main": "generators/app/index.js",
