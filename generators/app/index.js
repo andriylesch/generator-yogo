@@ -25,7 +25,7 @@ module.exports = class extends yeoman {
   }
 
   configuring() {
-    this.log('configuring');
+    //this.log('configuring');
     this.projectName = _.kebabCase(this.appname);
   }
 
@@ -34,16 +34,16 @@ module.exports = class extends yeoman {
     this.log(
       yosay(
         'Welcome to ' +
-          chalk`{bold.rgb(239, 115, 16) YoGo} ` +
-          chalk`{bold.rgb(105, 215, 226) GoLang} generator!`
+        chalk`{bold.rgb(239, 115, 16) YoGo} ` +
+        chalk`{bold.rgb(105, 215, 226) GoLang} generator!`
       )
     );
 
     if (!this.IsContinue) {
       this.log(
-        `Create progect in directory '${chalk.red(
+        `Create project in directory '${chalk.red(
           'GOPATH/src/<YOUR_PROJECT>'
-        )}'. YoGo generator will stop execution.`
+        )}'. Right now YoGo generator will stop execution.`
       );
       return;
     }
@@ -67,7 +67,7 @@ module.exports = class extends yeoman {
       {
         type: 'list',
         name: 'dependencytool',
-        message: 'What type of dependency management tools do you want to use?',
+        message: 'What type of dependency management tool do you want to use?',
         choices: [
           {
             name: 'golang/dep - (GO official experiment)',
@@ -341,7 +341,7 @@ module.exports = class extends yeoman {
       '**********************************************************************************'
     );
     this.log(
-      '* Your project is now created, you can use the following commands to get going   *'
+      '* Your project is now created, follow instruction bellow                         *'
     );
     this.log(
       '**********************************************************************************'
