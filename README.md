@@ -1,12 +1,12 @@
 # YoGo - golang code generator 
 ![Logo](https://github.com/andriylesch/generator-yogo/blob/master/logo_small.png)
 
-[Yeoman](http://yeoman.io/) generator for [GO](https://golang.org/) language allows you to create projects like :
-- Console (basic "Hello world")
-- Rest API microservice
+YoGo is a [Yeoman](http://yeoman.io/) generator for [GO](https://golang.org/) language, which allows you to create projects in the form of:
+- Console (basic "Hello world") apps
+- ReST API microservices
 
-So right now as developer you don't need to create each time the same skeleton of project. 
-Just generate it and focus for implementing logic in new microservice.
+This tool is meant for developers with the aim of removing the need to recreate each time the same skeleton when starting a new project. 
+YoGo generates it for him, so he can focus on implementing logic in new app.
 
 ### The Go Programming Language
 
@@ -19,7 +19,7 @@ Detail info you can find [here](https://golang.org/doc/).
 ```bash
 npm install -g yo
 ```
-- Install generator-yogo 
+- Install generator-yogo
 
 ```bash
 npm install generator-yogo
@@ -32,7 +32,7 @@ yo yogo
 
 # Create new project
 
-Create new directory in folder **GOPATH/src** folder
+Create a new directory in **GOPATH/src**
 
 ```bash
 cd $GOPATH/src
@@ -41,12 +41,12 @@ cd [ProjectName]
 yo yogo
 ```
 
-And follow list of options
+...and follow the interactive option selection
 
 ## Structure of projects
 
 ```
-  ATTENTION:  YoGo generator will only generate directory hierarchy in *$GOPATH/src* folder.
+  NOTE: the YoGo generator will only generate the directory hierarchy in *$GOPATH/src*.
 ```
 **Example console app**
 <pre>
@@ -85,19 +85,19 @@ $GOPATH folder
         └── Readme.md                   
 </pre>
 
-**FYI:** In future will be provided list of new projects
+**FYI:** Future development will add support for:
 - GO-KIT microservice
 - KAFKA producer
 - KAFKA consumer
-- etc
+- etc.
 
 # Generate project via docker 
 
-Follow options bellow
-- install docker on your local system 
+If you want to generate your project in a Docker container (i.e. you don't want to install the YoGo dependencies on your machine):
+- install docker on your machine 
 - clone this repository (git clone)
-- open terminal and go to `generator-yogo` folder
-- type command bellow
+- open a terminal and go to the `generator-yogo` folder
+- enter the following command:
 
 for windows users
 ``` bash
@@ -108,27 +108,27 @@ docker run -it -v {YOUR_LOCAL_PATH}:/home/yeoman -e LOCAL_PATH=${LOCAL_PATH} --n
 for Linux and MacOS users
 
 ```bash
-make docker LOCAL_PATH=YOUR_LOCAL_PATH
+make docker LOCAL_PATH=<YOUR_LOCAL_PATH>
 ```
-where **YOUR_LOCAL_PATH** - local folder where will be generated your project
+where **<YOUR_LOCAL_PATH>** is the local folder where you want your project to be generated.
 
 
-# How to create new package in existed microservice.
+# How to create a new package in an existing microservice.
 
-Open in terminal your project.
+Open a terminal, and from your project's folder run:
 
 ```bash
 yo yogo:pkgg
 ```
 
-List of packages what is possible to create and use :
+You can choose the kind of package you want to create and use:
 - config
 - REST-API endpoint
 
 ### Config package
 
-Developer has possibility to add **config** package in his application. 
-In this case it will be generated standart config package with structure 
+One possible type of package is **config**. 
+In this case, the package will be generated with the following structure 
 
 <pre>
 $GOPATH folder
@@ -141,13 +141,13 @@ $GOPATH folder
           └── config.toml.example     # config example file
 </pre>
 
-###### NOTE: As default, **YOGO** generate config.toml file with three ENV valiables ( *APP_PORT*, *KAFKA_BROKERS*, *SVC_TRACING_ZIPKIN* )
+###### NOTE: By default, **YOGO** generates a config.toml file with three ENV variables ( *APP_PORT*, *KAFKA_BROKERS*, *SVC_TRACING_ZIPKIN* )
 
 #### Extend config package 
 
-Add config.toml file in your root folder of project with list of ENV variables.
+You can add a config.toml file in your project's root folder with the list of ENV variables you need.
 
-###### As example
+###### For example:
 ```
 TEST=12345
 TEST1=4567
@@ -155,4 +155,4 @@ TEST2=qwerty
 DB_PORT=5432
 ```
 
-Right now generate config package. All ENVs will be added in code plus default ( *APP_PORT*, *KAFKA_BROKERS*, *SVC_TRACING_ZIPKIN* ).
+After doing this, when generating the config package, all variables will be added on top of the default ones (*APP_PORT*, *KAFKA_BROKERS*, *SVC_TRACING_ZIPKIN*).
