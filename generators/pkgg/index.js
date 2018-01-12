@@ -18,8 +18,8 @@ module.exports = class extends yeoman {
     this.log(
       yosay(
         'Welcome to ' +
-        chalk`{bold.rgb(239, 115, 16) YoGo} ` +
-        chalk`{bold.rgb(105, 215, 226) GoLang} generator!`
+          chalk`{bold.rgb(239, 115, 16) YoGo} ` +
+          chalk`{bold.rgb(105, 215, 226) GoLang} generator!`
       )
     );
 
@@ -74,7 +74,7 @@ module.exports = class extends yeoman {
             this.log('\n');
             this.log(
               chalk.default.red(
-                "ERROR : Your config.toml file is not valid. 'generator-yogo' will create default config package."
+                'ERROR : Your config.toml file is not valid. YoGo will create default config package.'
               )
             );
             this.log('\n');

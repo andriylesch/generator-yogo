@@ -25,7 +25,7 @@ module.exports = class extends yeoman {
   }
 
   configuring() {
-    //this.log('configuring');
+    // This.log('configuring');
     this.projectName = _.kebabCase(this.appname);
   }
 
@@ -34,16 +34,16 @@ module.exports = class extends yeoman {
     this.log(
       yosay(
         'Welcome to ' +
-        chalk`{bold.rgb(239, 115, 16) YoGo} ` +
-        chalk`{bold.rgb(105, 215, 226) GoLang} generator!`
+          chalk`{bold.rgb(239, 115, 16) YoGo} ` +
+          chalk`{bold.rgb(105, 215, 226) GoLang} generator!`
       )
     );
 
     if (!this.IsContinue) {
       this.log(
-        `Create project in directory '${chalk.red(
+        `YoGo generator will only generate project in '${chalk.red(
           'GOPATH/src/<YOUR_PROJECT>'
-        )}'. Right now YoGo generator will stop execution.`
+        )} directory'. Otherwise process will be stopped.`
       );
       return;
     }
@@ -249,7 +249,7 @@ module.exports = class extends yeoman {
         this.log('\n');
         this.log(
           chalk.default.red(
-            "ERROR : Your config toml file is not valid. 'generator-yogo' will create default config package."
+            'ERROR : Your config.toml file is not valid. YoGo will create default config package.'
           )
         );
         this.log('\n');
