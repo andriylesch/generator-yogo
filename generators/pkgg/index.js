@@ -74,7 +74,7 @@ module.exports = class extends yeoman {
             this.log('\n');
             this.log(
               chalk.default.red(
-                "ERROR : Your config toml file is not valid. 'generator-yogo' will create default config package."
+                'ERROR : Your config.toml file is not valid. YoGo will create default config package.'
               )
             );
             this.log('\n');
@@ -164,7 +164,7 @@ module.exports = class extends yeoman {
       '**********************************************************************************'
     );
     this.log(
-      '* Your package is now created, you can follow description and start using *'
+      '* Your package is now created, follow the instructions below                     *'
     );
     this.log(
       '**********************************************************************************'

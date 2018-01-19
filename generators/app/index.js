@@ -25,7 +25,6 @@ module.exports = class extends yeoman {
   }
 
   configuring() {
-    this.log('configuring');
     this.projectName = _.kebabCase(this.appname);
   }
 
@@ -41,9 +40,9 @@ module.exports = class extends yeoman {
 
     if (!this.IsContinue) {
       this.log(
-        `Create progect in directory '${chalk.red(
+        `YoGo generator will only generate project in '${chalk.red(
           'GOPATH/src/<YOUR_PROJECT>'
-        )}'. YoGo generator will stop execution.`
+        )} directory'. Otherwise the generation will be stopped.`
       );
       return;
     }
@@ -67,7 +66,7 @@ module.exports = class extends yeoman {
       {
         type: 'list',
         name: 'dependencytool',
-        message: 'What type of dependency management tools do you want to use?',
+        message: 'What type of dependency management tool do you want to use?',
         choices: [
           {
             name: 'golang/dep - (GO official experiment)',
@@ -249,7 +248,7 @@ module.exports = class extends yeoman {
         this.log('\n');
         this.log(
           chalk.default.red(
-            "ERROR : Your config toml file is not valid. 'generator-yogo' will create default config package."
+            'ERROR : Your config.toml file is not valid. YoGo will create default config package.'
           )
         );
         this.log('\n');
@@ -341,7 +340,7 @@ module.exports = class extends yeoman {
       '**********************************************************************************'
     );
     this.log(
-      '* Your project is now created, you can use the following commands to get going   *'
+      '* Your project is now created, follow the instructions below                     *'
     );
     this.log(
       '**********************************************************************************'
