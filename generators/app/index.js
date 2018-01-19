@@ -25,7 +25,6 @@ module.exports = class extends yeoman {
   }
 
   configuring() {
-    // This.log('configuring');
     this.projectName = _.kebabCase(this.appname);
   }
 
@@ -43,7 +42,7 @@ module.exports = class extends yeoman {
       this.log(
         `YoGo generator will only generate project in '${chalk.red(
           'GOPATH/src/<YOUR_PROJECT>'
-        )} directory'. Otherwise process will be stopped.`
+        )} directory'. Otherwise the generation will be stopped.`
       );
       return;
     }
@@ -341,7 +340,7 @@ module.exports = class extends yeoman {
       '**********************************************************************************'
     );
     this.log(
-      '* Your project is now created, follow instruction bellow                         *'
+      '* Your project is now created, follow the instructions below                     *'
     );
     this.log(
       '**********************************************************************************'

@@ -164,7 +164,7 @@ module.exports = class extends yeoman {
       '**********************************************************************************'
     );
     this.log(
-      '* Your package is now created, follow instruction bellow                         *'
+      '* Your package is now created, follow the instructions below                     *'
     );
     this.log(
       '**********************************************************************************'
