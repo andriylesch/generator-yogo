@@ -19,3 +19,7 @@
 # [[override]]
 #  name = "github.com/x/y"
 #  version = "2.4.0"
+
+[[override]]
+ name = "github.com/apache/thrift"
+ version = "0.10.0"
