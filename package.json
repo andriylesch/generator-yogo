@@ -1,6 +1,6 @@
 {
   "name": "generator-yogo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description":
     "Generator golang allows to create projects like (Console ('Hello world'), REST-API)",
   "author": {
