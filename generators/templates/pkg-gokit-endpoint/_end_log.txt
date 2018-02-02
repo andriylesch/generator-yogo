@@ -1,0 +1,23 @@
+
+<%- chalk.green('In file "main.go" you will need to add part of code :') %>
+
+<%- chalk.green("- Section for initialize Service, Tracing, Endpoint.") %>
+
+// create <%- packagename%> service
+<%- packagename%>Service, err := <%- packagename%>.NewService()
+if err != nil {
+	logger.Error(err.Error())
+}
+
+<%- packagename%>Service = <%- packagename%>.NewTracing(<%- packagename%>Service)
+// create <%- packagename%> endpoints
+<%- packagename%>Endpoint := <%- packagename%>.Endpoints{
+	GetEndpoint: <%- packagename%>.MakeEndpoint(<%- packagename%>Service),
+}
+
+<%- chalk.green("- Add handler") %>
+
+mux.Handle("/<%- packagename%>/", tracing.HTTPMiddleware("<%- packagename%>_handler", <%- packagename%>.MakeHTTPHandler(<%- packagename%>Endpoint)))
+
+<%- chalk.green("Enjoy :) ") %>
+

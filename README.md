@@ -3,7 +3,8 @@
 
 YoGo is a [Yeoman](http://yeoman.io/) generator for [GO](https://golang.org/) language, which allows you to create projects in the form of:
 - Console (basic "Hello world") apps
-- ReST API microservices
+- REST API microservice
+- GO-KIT API microservice
 
 This tool is meant for developers with the aim of removing the need to recreate each time the same skeleton when starting a new project. 
 YoGo generates it for him, so he can focus on implementing logic in new app.
@@ -86,7 +87,6 @@ $GOPATH folder
 </pre>
 
 **FYI:** Future development will add support for:
-- GO-KIT microservice
 - KAFKA producer
 - KAFKA consumer
 - etc.
@@ -124,6 +124,7 @@ yo yogo:pkgg
 You can choose the kind of package you want to create and use:
 - config
 - REST-API endpoint
+- GO-KIT endpoint
 
 ### Config package
 

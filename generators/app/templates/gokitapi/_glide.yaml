@@ -1,21 +1,22 @@
 package: <%- repourl%>
 import:
-- package: github.com/gorilla/mux
-  version: v1.5.0
-- package: github.com/jmoiron/sqlx
+- package: github.com/go-kit/kit
+  subpackages:
+  - endpoint
 - package: github.com/ricardo-ch/go-logger
 - package: github.com/ricardo-ch/go-tracing
-  version: v0.1.0
 - package: github.com/spf13/viper
-  version: v1.0.0
+- package: github.com/fsnotify/fsnotify
+- package: github.com/go-stack/stack
+- package: github.com/gorilla/mux
+- package: github.com/opentracing/opentracing-go
 - package: go.uber.org/zap
-  version: v1.7.1
 - package: github.com/openzipkin/zipkin-go-opentracing
   version: v0.2.4
 - package: github.com/apache/thrift
   version: v0.10.0
-testImport:
+  subpackages:
+  - zapcore
 - package: github.com/stretchr/testify
-  version: v1.1.4
   subpackages:
   - assert

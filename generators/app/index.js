@@ -60,6 +60,10 @@ module.exports = class extends yeoman {
           {
             name: 'REST API microservice',
             value: 'restapi'
+          },
+          {
+            name: 'GO-KIT microservice',
+            value: 'gokitapi'
           }
         ]
       },
@@ -195,6 +199,72 @@ module.exports = class extends yeoman {
           { projectname: this.projectName, packagename: this.packageName }
         );
         break;
+
+      case 'gokitapi':
+        this.fs.copyTpl(
+          this.templatePath('gokitapi/_main.go'),
+          this.destinationPath('main.go'),
+          {
+            repourl: this.repoUrl,
+            projectname: this.projectName,
+            packagename: this.packageName
+          }
+        );
+
+        // Copy package name
+        this.fs.copyTpl(
+          this.templatePath(this.pathToTemplates + '/pkg-gokit-endpoint/_endpoint.go'),
+          this.destinationPath('./' + this.packageName + '/endpoint.go'),
+          { projectname: this.projectName, packagename: this.packageName }
+        );
+        this.fs.copyTpl(
+          this.templatePath(
+            this.pathToTemplates + '/pkg-gokit-endpoint/_http_transport.go'
+          ),
+          this.destinationPath('./' + this.packageName + '/http_transport.go'),
+          { projectname: this.projectName, packagename: this.packageName }
+        );
+        this.fs.copyTpl(
+          this.templatePath(this.pathToTemplates + '/pkg-gokit-endpoint/_model.go'),
+          this.destinationPath('./' + this.packageName + '/model.go'),
+          { projectname: this.projectName, packagename: this.packageName }
+        );
+        this.fs.copyTpl(
+          this.templatePath(this.pathToTemplates + '/pkg-gokit-endpoint/_service.go'),
+          this.destinationPath('./' + this.packageName + '/service.go'),
+          { projectname: this.projectName, packagename: this.packageName }
+        );
+        this.fs.copyTpl(
+          this.templatePath(
+            this.pathToTemplates + '/pkg-gokit-endpoint/_service_tracing.go'
+          ),
+          this.destinationPath('./' + this.packageName + '/service_tracing.go'),
+          { projectname: this.projectName, packagename: this.packageName }
+        );
+
+        // Copy utest package name
+        this.fs.copyTpl(
+          this.templatePath(
+            this.pathToTemplates + '/pkg-gokit-endpoint/_service_tracing_test.go'
+          ),
+          this.destinationPath('./' + this.packageName + '/service_tracing_test.go'),
+          { projectname: this.projectName, packagename: this.packageName }
+        );
+        this.fs.copyTpl(
+          this.templatePath(
+            this.pathToTemplates + '/pkg-gokit-endpoint/_endpoint_test.go'
+          ),
+          this.destinationPath('./' + this.packageName + '/endpoint_test.go'),
+          { projectname: this.projectName, packagename: this.packageName }
+        );
+        this.fs.copyTpl(
+          this.templatePath(
+            this.pathToTemplates + '/pkg-gokit-endpoint/_http_transport_test.go'
+          ),
+          this.destinationPath('./' + this.packageName + '/http_transport_test.go'),
+          { projectname: this.projectName, packagename: this.packageName }
+        );
+        break;
       default:
         this.log('nothing to do');
         break;
@@ -219,7 +289,11 @@ module.exports = class extends yeoman {
           this.fs.copyTpl(
             this.templatePath(this.projectType + '/_glide.yaml'),
             this.destinationPath('glide.yaml'),
-            { projectname: this.projectName, packagename: this.packageName }
+            {
+              projectname: this.projectName,
+              packagename: this.packageName,
+              repourl: this.repoUrl
+            }
           );
           break;
         case 'dep':
