@@ -1,0 +1,3 @@
+'<%- chalk.green('Right now you can get access to your ENV variable like "config.<YOUR_NAME_OF_VARIABLE>"') %>'
+
+**********************************************************************************

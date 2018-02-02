@@ -12,7 +12,7 @@ import (
 
 	"<%- repourl%>/config"
 	"<%- repourl%>/<%- packagename%>"
-	"github.com/ricardo-ch/go-logger"
+	logger "github.com/ricardo-ch/go-logger"
 	tracing "github.com/ricardo-ch/go-tracing"
 )
 
@@ -52,7 +52,7 @@ func main() {
 		// index endpoint
 		router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusOK)
-			fmt.Fprintln(w, "Welcome to the demo-yogo API!")
+			fmt.Fprintln(w, fmt.Sprintf("Welcome to the %s API!",appName))
 		})
 
 		// healthz endpoint
@@ -68,7 +68,7 @@ func main() {
 			Handler: router,
 		}
 
-		logger.Info(fmt.Sprintf("The microservice demo-yogo is started on port %s", config.AppPort), zap.String("port", config.AppPort))
+		logger.Info(fmt.Sprintf("The microservice %s is started on port %s", appName,config.AppPort), zap.String("port", config.AppPort))
 		errc <- httpServer.ListenAndServe()
 
 	}()
