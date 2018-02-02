@@ -14,15 +14,10 @@ import (
 func MakeHTTPHandler(endpoints Endpoints) http.Handler {
 	r := mux.NewRouter()
 
-	options := []kithttp.ServerOption{
-		kithttp.ServerErrorEncoder(encodeError()),
-	}
-
 	getHandler := kithttp.NewServer(
 		endpoints.GetEndpoint,
 		decodeRequest,
 		encodeResponse,
-		options...,
 	)
 
 	r.Methods("GET").Path("/<%- packagename%>/").Handler(getHandler)
@@ -48,18 +43,4 @@ func encodeResponse(ctx context.Context, w http.ResponseWriter, response interfa
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	return json.NewEncoder(w).Encode(response)
-}
-
-func encodeError() kithttp.ErrorEncoder {
-	return func(ctx context.Context, err error, w http.ResponseWriter) {
-
-		// create extra fields for response
-		outputBody := map[string]interface{}{}
-
-		// you can write your logic for handle errors
-
-		outputBody["error"] = err.Error()
-		w.Header().Set("Content-Type", "application/json; charset=utf-8")
-		json.NewEncoder(w).Encode(outputBody)
-	}
 }

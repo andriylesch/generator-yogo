@@ -8,7 +8,7 @@ type Service interface {
 	Get(ctx context.Context, request <%- packagename%>Request) (<%- packagename%>Response, error)
 }
 
-//Service struct
+// Service struct
 type service struct {
 }
 

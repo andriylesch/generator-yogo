@@ -18,7 +18,6 @@ func TestMakeEndpoint(t *testing.T) {
 
 	//Assert
 	assert.NoError(t, err)
-	assert.Nil(t, err)
 	result, ok := wl.(<%- packagename%>Response)
 	assert.Equal(t, true, ok)
 	assert.Equal(t, testObjResponse, result)
