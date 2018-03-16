@@ -108,7 +108,8 @@ docker run -it -v {YOUR_LOCAL_PATH}:/home/yeoman -e LOCAL_PATH=${LOCAL_PATH} --n
 for Linux and MacOS users
 
 ```bash
-make docker LOCAL_PATH=<YOUR_LOCAL_PATH>
+make docker-build
+make docker-run LOCAL_PATH=<YOUR_LOCAL_PATH>
 ```
 where **<YOUR_LOCAL_PATH>** is the local folder where you want your project to be generated.
 
