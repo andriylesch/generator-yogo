@@ -110,7 +110,7 @@ module.exports = class extends yeoman {
           {
             name: 'Dockerfile',
             value: 'dockerfile',
-            checked: false
+            checked: true
           },
           {
             name: 'docker-compose',

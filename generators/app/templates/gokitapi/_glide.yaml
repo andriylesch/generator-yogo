@@ -14,7 +14,7 @@ import:
 - package: github.com/openzipkin/zipkin-go-opentracing
   version: v0.2.4
 - package: github.com/apache/thrift
-  version: v0.11.0
+  version: v0.10.0
   subpackages:
   - zapcore
 - package: github.com/stretchr/testify

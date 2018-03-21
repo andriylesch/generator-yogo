@@ -6,7 +6,7 @@ docker-build:
 
 # run container
 docker-run:
-	docker run -it -v $(LOCAL_PATH):/home/yeoman -e LOCAL_PATH=$(LOCAL_PATH) --name generator-yogo-container generator-yogo
+	docker run -it --rm -v $(LOCAL_PATH):/home/yeoman -e LOCAL_PATH=$(LOCAL_PATH) --name generator-yogo-container generator-yogo
 
 # build docker image than run container
 docker: docker-build docker-run
