@@ -104,7 +104,7 @@ If you want to generate your project in a Docker container (i.e. you don't want 
 for windows users
 ``` bash
 docker build -t generator-yogo:latest .
-docker run -it -v {YOUR_LOCAL_PATH}:/home/yeoman -e LOCAL_PATH=${LOCAL_PATH} --name generator-yogo-container generator-yogo
+docker run -it --rm -v {YOUR_LOCAL_PATH}:/home/yeoman -e LOCAL_PATH=${LOCAL_PATH} --name generator-yogo-container generator-yogo
 ```
 
 for Linux and MacOS users
