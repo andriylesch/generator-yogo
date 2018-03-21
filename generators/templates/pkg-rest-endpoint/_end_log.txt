@@ -1,6 +1,8 @@
 
 <%- chalk.green('In file "main.go" you will need to add part of code :') %>
 
+<%- chalk.green("- in import section add new package") %>
+
 <%- chalk.green("- Section for initialize Service, Tracing, Endpoint.") %>
 
 // <%- packagename%> endpoint

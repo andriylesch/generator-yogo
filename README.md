@@ -15,6 +15,8 @@ Detail info you can find [here](https://golang.org/doc/).
 
 # Preparation for Usage
 
+- Install nodejs and npm on your system
+
 - Install yeoman on your system
 
 ```bash
@@ -112,6 +114,13 @@ make docker-build
 make docker-run LOCAL_PATH=<YOUR_LOCAL_PATH>
 ```
 where **<YOUR_LOCAL_PATH>** is the local folder where you want your project to be generated.
+
+**ATTENTION: if you have error like :**
+```
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+
+follow this link: https://apple.stackexchange.com/questions/254380/macos-sierra-invalid-active-developer-path
+```
 
 
 # How to create a new package in an existing microservice.

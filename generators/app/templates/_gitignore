@@ -25,5 +25,7 @@ env.list
 *vendor/
 .code
 .idea
+.bash_history
+.config
 
 
