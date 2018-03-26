@@ -5,14 +5,16 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var toml = require('toml');
 var ejs = require('ejs');
+var path = require('path');
 
 module.exports = class extends yeoman {
   _getRepoUrl() {
     var destinationPath = process.env.LOCAL_PATH || this.destinationRoot();
     var repoUrl = '';
-    var index = destinationPath.indexOf('/src/');
+    var src = path.sep + 'src' + path.sep;
+    var index = destinationPath.indexOf(src);
     if (index !== -1) {
-      repoUrl = destinationPath.substring(index + '/src/'.length);
+      repoUrl = destinationPath.substring(index + src.length);
     }
     return repoUrl;
   }
