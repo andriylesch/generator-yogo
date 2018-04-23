@@ -1,0 +1,8 @@
+
+<% if (dependencytool === "dep") { %>1) '<%- chalk.green('dep ensure -v') %>' <% } %><% if (dependencytool === "glide") { %>1) '<%- chalk.green('glide install') %>' <% } %>
+
+2) '<%- chalk.green('docker-compose up kafka') %>'
+
+3) '<%- chalk.green('make run') %>' or '<%- chalk.green('go run main.go') %>'
+
+**********************************************************************************

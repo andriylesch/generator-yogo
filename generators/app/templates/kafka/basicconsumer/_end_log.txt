@@ -1,0 +1,6 @@
+
+<% if (dependencytool === "dep") { %>1) '<%- chalk.green('dep ensure -v') %>' <% } %><% if (dependencytool === "glide") { %>1) '<%- chalk.green('glide install') %>' <% } %>
+
+2) '<%- chalk.green('go run main.go') %>'
+
+**********************************************************************************
