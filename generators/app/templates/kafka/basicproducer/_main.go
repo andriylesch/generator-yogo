@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/Shopify/sarama"
 	logger "github.com/ricardo-ch/go-logger"
 	"<%- repourl%>/producer"
 	"<%- repourl%>/config"
 	uuid "github.com/satori/go.uuid"
 )
 
-
+// User ...
 type User struct {
 	UserID    string `json:"user_id"`
 	Nick      string `json:"nick"`
@@ -21,7 +22,7 @@ type User struct {
 }
 
 func init() {
-	
+
 	// initialization (optional)
 	logger.InitLogger(false)
 
@@ -33,8 +34,8 @@ func main() {
 		UserID:    uuid.NewV4().String(),
 		Nick:      "test_nick",
 		Email:     "test@gmail.com",
-		FirstName: "firstName",
-		LastName:  "lastName",
+		FirstName: "FN",
+		LastName:  "LN",
 	}
 
 	userJSON, err := json.Marshal(user)
@@ -43,17 +44,20 @@ func main() {
 		return
 	}
 
-	// kconfig := sarama.NewConfig()
-	// kconfig.Version = sarama.V1_0_0_0
-	// kconfig.Producer.Return.Errors = true
-
 	// init Producer
-	producer, err := producer.NewProducer(nil, strings.Split(config.KafkaBrokers, ","))
+	kconfig := sarama.NewConfig()
+	kconfig.Producer.RequiredAcks = sarama.WaitForLocal
+	kconfig.Producer.Retry.Max = 10
+	kconfig.Producer.Return.Successes = true
+	kconfig.Version = sarama.V1_0_0_0
+
+	prod, err := producer.NewProducer(kconfig, strings.Split(config.KafkaBrokers, ","))
 	if err != nil {
-		logger.Error(err.Error())
-		return
+		logger.Error(fmt.Sprintf("[ERROR] Failed to start Sarama producer: %s\n", err.Error()))
 	}
 
-	producer.ProduceMessage("YOUR_TOPIC", userJSON)
-	fmt.Println("test message: ", string(userJSON))
+	prod.ProduceMessage("YOUR_TOPIC", sarama.ByteEncoder(userJSON))
+
+	fmt.Println("Message : ", string(userJSON))
 }
+

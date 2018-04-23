@@ -9,7 +9,7 @@ docker-run:
 	docker run -it --rm -v $(LOCAL_PATH):/home/yeoman -e LOCAL_PATH=$(LOCAL_PATH) --name generator-yogo-container generator-yogo
 
 # build docker image than run container
-docker: docker-build docker-run
+docker: docker-build docker-run 
 
 # remove container and image
 docker-rm: 

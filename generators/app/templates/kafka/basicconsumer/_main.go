@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/Shopify/sarama"
-	cluster "github.com/bsm/sarama-cluster"
 	logger "github.com/ricardo-ch/go-logger"
 	"<%- repourl%>/config"
 )
@@ -20,34 +19,49 @@ func init() {
 }
 
 func main() {
+	kconfig := sarama.NewConfig()
+	kconfig.Version = sarama.V1_0_0_0
 
-	configKafka := cluster.NewConfig()
-	configKafka.Consumer.Return.Errors = true
-	configKafka.Consumer.Offsets.Initial = sarama.OffsetOldest
-	configKafka.Version = sarama.V1_0_0_0
-
-	consumer, err := cluster.NewConsumer(strings.Split(config.KafkaBrokers, ","), "YOUR_GROUP_ID", []string{"YOUR_TOPIC", "YOUR_TOPIC2"}, configKafka)
+	consumer, err := sarama.NewConsumer(strings.Split(config.KafkaBrokers, ","), kconfig)
 	if err != nil {
 		logger.Error(err.Error())
-		os.Exit(1)
 	}
 
+	defer func() {
+		if localErr := consumer.Close(); localErr != nil {
+			logger.Error(localErr.Error())
+		}
+	}()
+
+	partitionConsumer, err := consumer.ConsumePartition("YOUR_TOPIC", 0, sarama.OffsetNewest)
+	if err != nil {
+		panic(err)
+	}
+
+	defer func() {
+		if err := partitionConsumer.Close(); err != nil {
+			logger.Error(err.Error())
+		}
+	}()
+
+	// Trap SIGINT to trigger a shutdown.
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
 
+	consumed := 0
+ConsumerLoop:
 	for {
 		select {
-		case err := <-consumer.Errors():
-			fmt.Println(err, "consumer.Errors()")
-		case msg := <-consumer.Messages():
-			fmt.Println("---------------------------------------------------")
-			fmt.Println("TOPIC= ", msg.Topic)
-			fmt.Println("Message= ", string(msg.Value))
-			fmt.Println("Timestamp = ", msg.Timestamp)
-			consumer.MarkOffset(msg, "")
+		case msg := <-partitionConsumer.Messages():
+			fmt.Println("----- Consumed message ----")
+			fmt.Printf("Time 	 : %s\n", msg.Timestamp)
+			fmt.Printf("Key 	 : %s\n", msg.Key)
+			fmt.Printf("Message : %s\n", msg.Value)
+			consumed++
 		case <-signals:
-			fmt.Println("Interruption is detected")
-			os.Exit(1)
+			break ConsumerLoop
 		}
 	}
+
+	logger.Info(fmt.Sprintf("Consumed: %d\n", consumed))
 }
