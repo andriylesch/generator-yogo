@@ -66,6 +66,14 @@ module.exports = class extends yeoman {
           {
             name: 'GO-KIT microservice',
             value: 'gokitapi'
+          },
+          {
+            name: 'KAFKA basic producer',
+            value: 'kafka/basicproducer'
+          },
+          {
+            name: 'KAFKA basic consumer',
+            value: 'kafka/basicconsumer'
           }
         ]
       },
@@ -266,6 +274,39 @@ module.exports = class extends yeoman {
           this.destinationPath('./' + this.packageName + '/http_transport_test.go'),
           { projectname: this.projectName, packagename: this.packageName }
         );
+        break;
+
+      case 'kafka/basicconsumer':
+        this.fs.copyTpl(
+          this.templatePath('kafka/basicconsumer/_main.go'),
+          this.destinationPath('main.go'),
+          {
+            repourl: this.repoUrl,
+            projectname: this.projectName,
+            packagename: this.packageName
+          }
+        );
+
+        break;
+      case 'kafka/basicproducer':
+        this.fs.copyTpl(
+          this.templatePath('kafka/basicproducer/_main.go'),
+          this.destinationPath('main.go'),
+          {
+            repourl: this.repoUrl,
+            projectname: this.projectName,
+            packagename: this.packageName
+          }
+        );
+
+        this.fs.copyTpl(
+          this.templatePath(
+            this.pathToTemplates + '/' + this.projectType + '/_producer.go'
+          ),
+          this.destinationPath('./producer/producer.go'),
+          { projectname: this.projectName, packagename: this.packageName }
+        );
+
         break;
       default:
         this.log('nothing to do');

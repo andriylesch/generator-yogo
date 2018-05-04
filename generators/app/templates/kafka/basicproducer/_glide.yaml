@@ -1,0 +1,12 @@
+package: <%- repourl%>
+import:
+- package: github.com/Shopify/sarama
+  version: v1.16.0
+- package: github.com/ricardo-ch/go-logger
+- package: github.com/spf13/viper
+  version: v1.0.2
+testImport:
+- package: github.com/stretchr/testify
+  version: v1.2.1
+  subpackages:
+  - assert
