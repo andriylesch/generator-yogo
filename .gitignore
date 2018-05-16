@@ -5,3 +5,4 @@ coverage
 .idea
 *_todelete
 *.log
+package-lock.json
